@@ -1,0 +1,266 @@
+# ============================================
+# Cocos2d-x CardMatch Project .gitignore
+# ============================================
+
+# ==================== Visual Studio ====================
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+*.vcxproj.user
+
+# Visual Studio cache/options directory
+.vs/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# ==================== Cocos2d-x ====================
+# Cocos build directory
+build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Cocos simulator
+simulator/
+runtime/
+
+# Cocos compiled resources
+*.csb.meta
+*.csd.meta
+
+# Cocos Studio (deprecated)
+*.ccs
+cocosstudio/
+
+# ==================== C++ ====================
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.ipa
+*.apk
+
+# ==================== Android ====================
+proj.android/
+proj.android-studio/app/build/
+proj.android-studio/.gradle/
+proj.android-studio/.idea/
+proj.android-studio/app/.externalNativeBuild/
+proj.android-studio/local.properties
+proj.android-studio/*.iml
+proj.android-studio/.DS_Store
+proj.android-studio/gradle.properties
+proj.android-studio/app/libs/
+
+# Android NDK
+*.ndk
+*.so
+obj/
+
+# ==================== iOS / Mac ====================
+# Xcode
+proj.ios_mac/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ==================== Windows ====================
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin
+$RECYCLE.BIN/
+
+# Windows shortcuts
+*.lnk
+
+# ==================== Linux ====================
+*~
+*.swp
+*.swo
+
+# ==================== CMake ====================
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+# ==================== IDEs ====================
+# JetBrains (CLion, Rider)
+.idea/
+*.iml
+*.iws
+cmake-build-*/
+
+# Eclipse
+.cproject
+.project
+.settings/
+
+# Code::Blocks
+*.cbp
+*.layout
+*.depend
+
+# ==================== Project Specific ====================
+# Build output
+build/
+bin/
+lib/
+
+# Cocos frameworks (usually linked, not stored in repo)
+cocos2d/
+
+# Resources cache
+.cocos-project.json
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# Documentation
+docs/html/
+docs/latex/
+
+# User-specific configuration
+config.local.json
+*.local.*
+
+# Test coverage
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+# ==================== Dependencies ====================
+# External libraries (if using submodules, adjust accordingly)
+external/
+third_party/
+vendor/
+
+# Node modules (if using any web tools)
+node_modules/
+package-lock.json
+
+# ==================== Game Specific ====================
+# Save files (development only)
+*.save
+SaveData/
+
+# Generated assets
+Resources/generated/
+
+# Asset cache
+.asset_cache/
+
+# ==================== Misc ====================
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Patches
+*.patch
+*.diff
+
+# Editor backups
+*~
+*.orig
+\#*\#
+.#*
+
+# ==================== Keep These ====================
+# Force include important files
+!.gitignore
+!.gitattributes
+!CMakeLists.txt
+!cocos2d-files.txt
