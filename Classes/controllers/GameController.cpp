@@ -86,7 +86,7 @@ void GameController::generateTestLevel() {
 
     if (config.playfieldCards.empty()) {
         CCLOG("Config empty. Using default pyramid layout.");
-        config = LevelGenerator::generateDefaultPyramid();  // ? 使用新服务
+        config = LevelGenerator::generateDefaultPyramid();  
     }
 
     GameModelGenerator::generate(_gameModel, config);
@@ -171,18 +171,21 @@ bool GameController::isCardMatchable(CardModel* card1, CardModel* card2) {
 }
 
 void GameController::handleMatchedCard(CardModel* clickedCard, CardView* clickedView) {
-    CardModel* topStackCard = _gameModel->getTopStackCard();
+    // 在移动牌之前记录旧底牌
+    CardModel* oldTopCard = _gameModel->getTopStackCard();
+    if (oldTopCard) oldTopCard->retain();
     
     // 记录撤销步骤
-    _undoManager->pushStep(clickedCard, clickedView->getPosition(), topStackCard, false);
+    _undoManager->pushStep(clickedCard, clickedView->getPosition(), oldTopCard, false);
 
-    // 执行动画
     if (_stackController) {
-        _stackController->moveCardToStack(clickedCard, clickedView->getPosition(), [this]() {
-            this->_gameModel->refreshCardStates();
-            this->refreshViewStates();
-            this->checkGameState();
-        });
+        _stackController->moveCardToStack(clickedCard, clickedView->getPosition(), 
+            [this, oldTopCard]() {
+                if (oldTopCard) oldTopCard->release();
+                this->_gameModel->refreshCardStates();
+                this->refreshViewStates();
+                this->checkGameState();
+            });
     }
 }
 
@@ -197,12 +200,17 @@ void GameController::onStockClicked() {
     if (_isGameEnded) return;
     if (!_gameModel || _gameModel->getStockCount() <= 0) return;
 
+    CardModel* oldTopCard = _gameModel->getTopStackCard();
+    if (oldTopCard) oldTopCard->retain();
+
     if (_stackController) {
-        _stackController->drawCardFromStock([this](CardModel* drawnCard) {
+        _stackController->drawCardFromStock([this, oldTopCard](CardModel* drawnCard) {
             if (drawnCard) {
-                _undoManager->pushStep(drawnCard, Vec2::ZERO, _gameModel->getTopStackCard(), true);
+                // 使用抽牌前保存的旧底牌
+                _undoManager->pushStep(drawnCard, Vec2::ZERO, oldTopCard, true);
                 this->checkGameState();
             }
+            if (oldTopCard) oldTopCard->release();
         });
     }
 }
@@ -213,7 +221,6 @@ void GameController::onUndoClicked() {
     UndoStep step;
     if (!_undoManager->popStep(step)) return;
 
-    // 恢复旧的栈顶
     _gameModel->setTopStackCard(step.previousTopCard);
     if (_stackController) {
         _stackController->updateStackView();
